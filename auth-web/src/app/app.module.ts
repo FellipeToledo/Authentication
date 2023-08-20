@@ -6,20 +6,30 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { NbAuthModule, NbPasswordAuthStrategy } from '@nebular/auth';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'cosmic' }),
     NbLayoutModule,
-    NbEvaIconsModule
+    NbEvaIconsModule,
+    NbAuthModule,
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+        }),
+      ],
+      forms: {},
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
